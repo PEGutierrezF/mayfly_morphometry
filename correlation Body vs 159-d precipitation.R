@@ -73,7 +73,7 @@ Figure1 <- ggarrange(p8 + rremove("x.text") , p17 ,
 annotate_figure(Figure1,
                 left = text_grob("Biomass ("*mg~AFDM/m^2*")", rot = 90,
                 color = "Black", face = "bold", size = 12))
-Figure1 + ggsave("Figure 1.TIFF",width=6, height=4,dpi=600)
+Figure1 + ggsave("Figure 1.jpeg",width=6, height=4,dpi=600)
 
 
 # Correlation between body length and 159-d precipitation -----------------
@@ -98,6 +98,6 @@ p25
 
 Figure2 <- p25 + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
                    panel.background = element_blank(), axis.line = element_line(colour = "black"))
-Figure2 + ggsave("Figure 2.TIFF",width=6, height=4,dpi=600)
+Figure2 + ggsave("Figure.jpeg",width=6, height=4,dpi=600)
 
 
