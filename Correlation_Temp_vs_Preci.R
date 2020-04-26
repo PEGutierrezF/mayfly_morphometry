@@ -42,10 +42,15 @@ shapiro.test(FirstY$Temperature)
 cor.test(SecondY$Temperature,SecondY$Precipitation,method = "pearson", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
 
 
+# All years ---------------------------------------------------------------
+
+cor.test(correlations$Temperature,correlations$Precipitation,method = "pearson", exact=F)
+
+
 # Graph -------------------------------------------------------------------
 
-p1 <- ggplot(correlations, aes(x=Temperature,
-                         y=Precipitation,
+p1 <- ggplot(correlations, aes(x=Precipitation,
+                         y=Temperature,
                          colour = as.factor(Year))) +
   geom_point() + 
   geom_smooth(method=lm,se=FALSE)
