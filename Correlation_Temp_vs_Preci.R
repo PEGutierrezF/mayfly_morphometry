@@ -46,7 +46,7 @@ cor.test(SecondY$Temperature,SecondY$Precipitation,method = "pearson", exact=F) 
 
 p1 <- ggplot(correlations, aes(x=Temperature,
                          y=Precipitation,
-                         colour = Year)) +
+                         colour = as.factor(Year))) +
   geom_point() + 
   geom_smooth(method=lm,se=FALSE)
 
