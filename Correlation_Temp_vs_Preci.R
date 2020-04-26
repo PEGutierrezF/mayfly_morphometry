@@ -51,6 +51,6 @@ p1 <- ggplot(correlations, aes(x=Temperature,
   geom_smooth(method=lm,se=FALSE)
 
 print(p1)
-
+p1 + ggsave("Correlation_Temp_vs_Precip.jpeg",width=6, height=4,dpi=600)
 
 
