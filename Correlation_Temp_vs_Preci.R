@@ -9,5 +9,48 @@
 #--------------------------------------------
 #
 
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+library(colorblindr)
+library(cowplot)
+library(colorspace)
+library(wesanderson)
+library(ggsci)
+
+
 correlations<- read.csv("Temp_vs_Preci.csv")
 correlations
+
+
+# 2002 correlation --------------------------------------------------------
+
+FirstY <- correlations[1:12,]
+FirstY
+shapiro.test(FirstY$Precipitation)
+shapiro.test(FirstY$Temperature)
+
+cor.test(FirstY$Temperature,FirstY$Precipitation,method = "pearson", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
+
+
+# 2003 correlation --------------------------------------------------------
+
+SecondY <- correlations[13:24,]
+SecondY
+shapiro.test(FirstY$Precipitation)
+shapiro.test(FirstY$Temperature)
+cor.test(SecondY$Temperature,SecondY$Precipitation,method = "pearson", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
+
+
+# Graph -------------------------------------------------------------------
+
+p1 <- ggplot(correlations, aes(x=Temperature,
+                         y=Precipitation,
+                         colour = Year)) +
+  geom_point() + 
+  geom_smooth(method=lm,se=FALSE)
+
+print(p1)
+
+
+
