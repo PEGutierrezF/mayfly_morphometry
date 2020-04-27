@@ -8,6 +8,8 @@
 #--------------------------------------------
 #
 
+BiocManager::install("annotatr")
+
 library(gg.gap)
 library("ggpubr")
 require("nlme")
@@ -16,6 +18,7 @@ library(dplyr)
 library("reshape2")
 library("forcats")
 library("gridExtra")
+library("BiocManager")
 
 ##### Biomass ##########
 
@@ -84,11 +87,11 @@ Figure1 <- ggarrange(p1 + rremove("x.text") , p2 ,
                      ncol = 1, nrow = 2)
 
 
-annotate_figure(Figure1,
+Figure1. <-annotate_figure(Figure1,
                 left = text_grob("Biomass ("*mg~AFDM~m^-2*")", rot = 90,
                                  color = "Black", face = "bold", size = 12))
 
-Figure1 + ggsave("Figure 2.jpeg",width=6, height=6,dpi=600)
+Figure1. + ggsave("Figure 2.jpeg",width=6, height=6,dpi=600)
 
 
 # Correlation between body length and 159-d precipitation -----------------
