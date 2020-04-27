@@ -54,26 +54,26 @@ print(r1)
 
 FirstY <- Rainfall[1:12,]
 FirstY
-shapiro.test(FirstY$MeanPrecipitation)
+shapiro.test(FirstY$Daily)
 shapiro.test(FirstY$Discharge)
 
-cor.test(FirstY$MeanPrecipitation,FirstY$Discharge,method = "pearson", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
+cor.test(FirstY$Daily,FirstY$Discharge,method = "spearman", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
 
 
 # 2003 correlation --------------------------------------------------------
 
-SecondY <- correlations[13:24,]
+SecondY <- Rainfall[13:24,]
 SecondY
-shapiro.test(FirstY$Precipitation)
-shapiro.test(FirstY$Temperature)
-cor.test(SecondY$Temperature,SecondY$Precipitation,method = "pearson", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
+shapiro.test(FirstY$Daily)
+shapiro.test(FirstY$Discharge)
+cor.test(SecondY$Daily,SecondY$Discharge,method = "spearman", exact=F) # "exact f" para quitar el error porque no quiere correr porque hay varios numeros iguales
 
 
 # All years ---------------------------------------------------------------
 
-cor.test(Rainfall$MeanPrecipitation,Rainfall$Discharge,method = "pearson", exact=F)
+cor.test(Rainfall$Daily,Rainfall$Discharge,method = "spearman", exact=F)
 
-r2 <- ggplot(Rainfall, aes(x=MeanPrecipitation,
+r2 <- ggplot(Rainfall, aes(x=Daily,
                                y=Discharge)) +
   geom_point() + 
   geom_smooth(method=lm,se=TRUE,colour="black", size=0.5) +
