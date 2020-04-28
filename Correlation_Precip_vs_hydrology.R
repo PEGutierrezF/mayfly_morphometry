@@ -78,7 +78,7 @@ r2 <- ggplot(Rainfall, aes(x=Daily,
   geom_point() + 
   geom_smooth(method=lm,se=TRUE,colour="black", size=0.5) +
   
-  xlab('Precipitation (mm)')+ ylab(expression(Discharge~(m~s^-3))) +
+  xlab('Precipitation (mm)')+ ylab(expression(Discharge~(m^-3~s))) +
   theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis x
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
   
