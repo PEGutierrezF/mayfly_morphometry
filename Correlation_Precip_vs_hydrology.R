@@ -71,9 +71,9 @@ cor.test(SecondY$Daily,SecondY$Discharge,method = "spearman", exact=F) # "exact 
 
 # All years ---------------------------------------------------------------
 
-cor.test(Rainfall$Daily,Rainfall$Discharge,method = "spearman", exact=F)
+cor.test(Rainfall$PrecipitationAIC,Rainfall$Discharge,method = "spearman", exact=F)
 
-r2 <- ggplot(Rainfall, aes(x=Daily,
+r2 <- ggplot(Rainfall, aes(x=PrecipitationAIC,
                                y=Discharge)) +
   geom_point() + 
   geom_smooth(method=lm,se=TRUE,colour="black", size=0.5) +
