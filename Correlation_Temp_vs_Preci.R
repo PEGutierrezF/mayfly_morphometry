@@ -45,7 +45,8 @@ cor.test(SecondY$Temperature,SecondY$Precipitation,method = "pearson", exact=F) 
 # All years ---------------------------------------------------------------
 
 cor.test(correlations$Temperature,correlations$Precipitation,method = "pearson", exact=F)
-
+shapiro.test(correlations$Temperature)
+shapiro.test(correlations$Precipitation)
 
 # Graph -------------------------------------------------------------------
 
@@ -56,6 +57,17 @@ p1 <- ggplot(correlations, aes(x=Precipitation,
   geom_smooth(method=lm,se=FALSE)
 
 print(p1)
-p1 + ggsave("Correlation_Temp_vs_Precip.jpeg",width=6, height=4,dpi=600)
+
+
+
+p2 <- ggplot(correlations, aes(x=Precipitation,
+                               y=Temperature)) +
+  geom_point() + 
+  geom_smooth(method=lm,se=FALSE)
+
+print(p2)
+
+TemperaturevsPrecipitation <- p1/p2
+TemperaturevsPrecipitation + ggsave("Correlation_Temp_vs_Precip.jpeg",width=6, height=8,dpi=600)
 
 
