@@ -71,6 +71,8 @@ cor.test(SecondY$Daily,SecondY$Discharge,method = "spearman", exact=F) # "exact 
 
 # All years ---------------------------------------------------------------
 
+shapiro.test(Rainfall$PrecipitationAIC)
+shapiro.test(Rainfall$Discharge)
 cor.test(Rainfall$PrecipitationAIC,Rainfall$Discharge,method = "spearman", exact=F)
 
 r2 <- ggplot(Rainfall, aes(x=PrecipitationAIC,
