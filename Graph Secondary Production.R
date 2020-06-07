@@ -41,7 +41,11 @@ p1 <- ggplot(SecondaryProduction, aes(x=Month,
   
  # ylim(0,11.5) +
   
-  xlab('')+ ylab("Production ("*mg~AFDM~m^-2*")") +
+  xlab('')+ ylab("Monthly production ("*mg~AFDM~m^-2*")") +
+  
+  theme(axis.title.y = element_text(size = 14, angle = 90)) + # axis x
+  theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
+  
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) +
   theme(axis.text.x = element_blank())+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
