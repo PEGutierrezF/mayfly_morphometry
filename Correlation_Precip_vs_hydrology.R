@@ -83,6 +83,8 @@ r2 <- ggplot(Rainfall, aes(x=PrecipitationAIC,
   geom_smooth(method=lm,se=TRUE,colour="black", size=0.5) +
   
   xlab('Precipitation (mm)')+ ylab(expression(Discharge~(m^-3~s))) +
+  theme(axis.title.x = element_text(size = 12, angle = 0)) + # axis x
+  theme(axis.title.y = element_text(size = 12, angle = 90)) + # axis y
   theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis x
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
   
