@@ -31,6 +31,8 @@ r1 <- ggplot(Rainfall, aes(x=Month,
   scale_color_manual(values=c("#2166ac", "#FF7F00"))+
 
   xlab('Month')+ ylab("Total monthly \n precipitation (mm)") +
+  theme(axis.title.x = element_text(size = 12, angle = 0)) + # axis x
+  theme(axis.title.y = element_text(size = 12, angle = 90)) + # axis y
   theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis x
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
   
