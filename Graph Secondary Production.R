@@ -37,7 +37,7 @@ p1 <- ggplot(Biomass, aes(x=Month,
   theme(legend.position = c(0.87, 0.86)) +
   theme(legend.text = element_text(color = "black", size = 12))+
   
-  ylim(0,10) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 2))+
   
   xlab('')+ ylab('')+
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) +
@@ -61,7 +61,7 @@ p2 <- ggplot(Biomass, aes(x=Month,
   
   theme(legend.position="none") +
   
-  ylim(0,18) +
+  scale_y_continuous(limits = c(0, 17), breaks = seq(0, 17, by = 4))+
   
   theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black"))+ #subaxis x
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black"))+# #subaxis y
