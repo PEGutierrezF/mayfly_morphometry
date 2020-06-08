@@ -9,6 +9,8 @@
 #--------------------------------------------
 #
 
+library(gg.gap)
+library(ggpubr)
 library(ggplot2)
 library(ggthemes)
 library(patchwork)
@@ -21,28 +23,23 @@ library(ggsci)
 Biomass <- read.csv("Biomass.csv")
 Biomass
 
-
-biomass$Month = factor(Biomass$Month, levels = month.abb)
-p1 <- ggplot(biomass, aes(x=Month,
-                              y=Production, 
-                              color= factor(Year))) +
-  geom_point(aes(), size = 4, fill="white") +
+Biomass$Month = factor(Biomass$Month, levels = month.abb)
+p1 <- ggplot(Biomass, aes(x=Month,
+                              y=First, 
+                              color=Type)) +
+  geom_point(aes(), size = 4, fill="white")+
   scale_color_manual(values=c("#2166ac", "#FF7F00"))+
   theme_bw() +
-  geom_line(aes(group = Year)) +
+  geom_line(aes(group = Type)) +
   
   theme(legend.title = element_blank()) +
   theme(legend.key=element_blank()) + 
-  theme(legend.position = c(0.9, 0.83)) +
+  theme(legend.position = c(0.87, 0.86)) +
   theme(legend.text = element_text(color = "black", size = 12))+
   
- # ylim(0,11.5) +
+  ylim(0,10) +
   
-  xlab('')+ ylab("Production ("*mg~AFDM~m^-2*")") +
-  
-  theme(axis.title.y = element_text(size = 12, angle = 90)) + # axis x
-  theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
-  
+  xlab('')+ ylab('')+
   theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) +
   theme(axis.text.x = element_blank())+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -50,33 +47,41 @@ p1 <- ggplot(biomass, aes(x=Month,
 p1
 
 
-# Emergent biomass --------------------------------------------------------
+# Biomass 2003 ------------------------------------------------------------
 
-biomass
-biomass$Month = factor(biomass$Month, levels = month.abb)
-p2 <- ggplot(biomass, aes(x=Month,
-                          y=Emergent, 
-                          color= factor(Year))) +
+biomass2003$Month = factor(biomass2003$Month, levels = month.abb)
+p2 <- ggplot(Biomass, aes(x=Month,
+                              y=Second, 
+                              color=Type)) +
   geom_point(aes(), size = 4, fill="white") +
   scale_color_manual(values=c("#2166ac", "#FF7F00"))+
   theme_bw() +
-  geom_line(aes(group = Year)) +
+  geom_line(aes(group = Type)) +
+  xlab('Month') + ylab('') + # #Axis 
   
   theme(legend.position="none") +
-  ylim(0,3) +
   
-  xlab('Month')+ ylab("Biomass ("*mg~AFDM~m^-2*")") +
+  ylim(0,18) +
   
-  theme(axis.title.x = element_text(size = 12, angle = 0)) + # axis x
-  theme(axis.title.y = element_text(size = 12, angle = 90)) + # axis y
-  theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis y
-  theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black")) + #subaxis x
+  theme(axis.text.x=element_text(angle=0, size=10, vjust=0.5, color="black"))+ #subaxis x
+  theme(axis.text.y=element_text(angle=0, size=10, vjust=0.5, color="black"))+# #subaxis y
   
+  theme(axis.title.x = element_text(color="black", size=12))+ # #Axis x
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
-p2
+print(p2)
 
-Graph <- p1/p2 + plot_annotation(tag_levels = 'A')
-Graph
+##### Figure 1 #####
 
-Graph + ggsave("Figure 2a.jpeg",width=6, height=6,dpi=600)
+Figure1 <- ggarrange(p1 + rremove("x.text") , p2 , align = "v",
+                     labels = c("A", "B"),font.label = list(size = 12,face= "plain",color = "black"),
+                     ncol = 1, nrow = 2)
+
+
+Figure1. <-annotate_figure(Figure1,
+                           left = text_grob("Biomass ("*mg~AFDM~m^-2*")", rot = 90,
+                                            color = "Black", face = "bold", size = 12))
+Figure1.
+Figure1. + ggsave("Figure 2.jpeg",width=6, height=6,dpi=600)
+
+
