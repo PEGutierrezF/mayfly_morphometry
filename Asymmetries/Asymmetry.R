@@ -27,7 +27,8 @@ summary(fit1)
 anova(fit1)
 rand(fit1)
 
-# First Wing Length Female
+
+# First Wing Length Female ------------------------------------------------
 # FWLF= First Wing Length Female
 
 FWLF.frm=read.csv("Asymmetries/FirstWLengthFemale.csv")
@@ -60,17 +61,20 @@ residuals(fit2, "pearson", scaled = TRUE)
 
 #  Measurement error ------------------------------------------------------
 
-Error_FWLF.frm=read.csv("FirstWLengthFemaleERROR.csv")
+Error_FWLF.frm=read.csv("Asymmetries/FirstWLengthFemaleERROR.csv")
 attach(Error_FWLF.frm)
 Error_FWLF.frm
 
 shapiro.test(ValuesFWLF)
 boxplot(ValuesFWLF~Side,data=FWLF.frm)
 
-B.mod=aov(ValuesFWLF~ Side * Individual, data=Error_FWLF.frm)
-summary(B.mod)
+FWLF.mod=aov(VFWLF ~ Side * Individual, data=Error_FWLF.frm)
+summary(FWLF.mod)
 
-hist(ValuesFWLF, data=Error_FWLF.frm)
+fit3 <- lme4::lmer(VFWLF ~ Side*Individual + (1|Individual), 
+                   data= Error_FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
+anova(fit3)
+summary(fit3)
 
 
 
@@ -158,7 +162,7 @@ summary(H.mod)
 
 ###### Forceps #####
 
-Forceps.frm=read.csv("Forceps.csv")
+Forceps.frm=read.csv("Asymmetries/Forceps.csv")
 attach(Forceps.frm)
 Forceps.frm
 
