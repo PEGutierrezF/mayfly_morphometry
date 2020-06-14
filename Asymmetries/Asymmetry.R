@@ -3,8 +3,6 @@ library(lme4)
 library(nlme)
 library(lmerTest)
 
-setwd ("D:/Curriculum/02_ Articulos/32- Gutierrez-F & Ramirez 2020 PeerJ/New Results/Asymmetries")
-
 
 ##### First Wing #####
 
@@ -31,7 +29,7 @@ rand(fit1)
 # First Wing Length Female
 # FWLF= First Wing Length Female
 
-FWLF.frm=read.csv("FirstWLengthFemale.csv")
+FWLF.frm=read.csv("Asymmetries/FirstWLengthFemale.csv")
 attach(FWLF.frm)
 FWLF.frm
 
@@ -42,11 +40,15 @@ B.mod=aov(ValuesFWLF~ Side * Individual, data=FWLF.frm)
 summary(B.mod)
 
 
-fit2 <- lme4::lmer(ValuesFWLF ~ Side + (1|Individual) + (1|Individual:Side), data= FWLF.frm, REML= FALSE)
+fit2 <- lme4::lmer(ValuesFWLF ~ Side + (1|Individual) + (1|Side:Individual), data= FWLF.frm, REML= FALSE)
 anova(fit2)
-summary(fit2.lmer)
+summary(fit2)
 rand(fit2)
-var(ranef(fit2)$Individual)
+
+install.packages("Metrics")
+library(Metrics)
+mse(FWLF.frm$ValuesFWLF, predict(fit2,FWLF.frm))
+
 
 #  Measurement error ------------------------------------------------------
 
