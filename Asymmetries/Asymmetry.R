@@ -2,6 +2,7 @@
 library(lme4)
 library(nlme)
 library(lmerTest)
+library(sjstats)
 
 
 ##### First Wing #####
@@ -43,11 +44,9 @@ summary(B.mod)
 fit2 <- lme4::lmer(ValuesFWLF ~ Side + (1|Individual) + (1|Side:Individual), data= FWLF.frm, REML= FALSE)
 anova(fit2)
 summary(fit2)
-rand(fit2)
+mse(fit2)
 
-install.packages("Metrics")
-library(Metrics)
-mse(FWLF.frm$ValuesFWLF, predict(fit2,FWLF.frm))
+rand(fit2)
 
 
 #  Measurement error ------------------------------------------------------
