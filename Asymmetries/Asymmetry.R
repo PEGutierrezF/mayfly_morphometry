@@ -168,15 +168,11 @@ Forceps.frm
 
 shapiro.test(Value)
 
-F.mod1=aov(Value~Side*factor(Indiv) + (1|Indiv),data=Forceps.frm)
-summary(F.mod1)
-
-
-fit10<-lmer(Value~ Side * Individual + (1|Individual),REML=TRUE, data=Forceps.frm)
-summary(fit10)
-anova(fit10)
-rand(fit10)
-
-boxplot(Value~Side,data=Forceps.frm)
-hist(Value)
+fit2 <- lme4::lmer(Value ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
+                   data= Forceps.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
+anova(fit2)
+mse(fit2)
+var(resid(fit2))*99/90
+summary(fit2)
+rand(fit2)
 
