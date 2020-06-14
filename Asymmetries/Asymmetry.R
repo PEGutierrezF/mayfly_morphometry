@@ -45,13 +45,17 @@ fit2 <- lme4::lmer(ValuesFWLF ~ Side*Individual + (1|Individual) + (1|Individual
                    data= FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
 mse(fit2)
-
+var(resid(fit2))*99/90
 summary(fit2)
-
-
 rand(fit2)
 
+devtools::install_github("goodekat/redres")
+library(redres)
+compute_redres(fit2)
 
+formula(fit2)
+REMLcrit(fit2)
+residuals(fit2, "pearson", scaled = TRUE)
 
 
 #  Measurement error ------------------------------------------------------
