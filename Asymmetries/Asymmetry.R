@@ -41,13 +41,13 @@ B.mod=aov(ValuesFWLF~ Side * Individual, data=FWLF.frm)
 summary(B.mod)
 
 
-fit2 <- lme4::lmer(ValuesFWLF ~ Side +  Individual+ (Side * Individual) + (1|Individual), 
+fit2 <- lme4::lmer(ValuesFWLF ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
                    data= FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
+mse(fit2)
 
 summary(fit2)
-resid(fit2)
-mse(fit2)
+
 
 rand(fit2)
 
