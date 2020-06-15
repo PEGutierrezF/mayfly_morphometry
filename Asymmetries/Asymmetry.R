@@ -168,7 +168,8 @@ Forceps.frm
 
 shapiro.test(Value)
 
-fit2 <- lme4::lmer(Value ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
+# p value used = lmerTest::lmer
+fit2 <- lme4::lmer(Value ~ Side * Individual + (1|Individual) + (1|Individual:Side), 
                    data= Forceps.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
 mse(fit2)
