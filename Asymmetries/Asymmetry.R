@@ -4,13 +4,15 @@ library(nlme)
 library(lmerTest)
 library(sjstats)
 
+# var(resid(f0))*99/90
+# https://stats.stackexchange.com/questions/114944/mixed-model-with-lmer-variance-of-residuals-should-give-the-same-as-level-1-var
 
 ##### First Wing #####
 
 # First Wing Area Female
 # FWAF= First Wing Area Female
 
-FWAF.frm=read.csv("FirstWAreaFemale.csv")
+FWAF.frm=read.csv("Asymmetries/FirstWAreaFemale.csv")
 attach(FWAF.frm)
 FWAF.frm
 
@@ -20,6 +22,8 @@ shapiro.test(V1)
 
 A.mod=aov(V1~ Side * Individual, data=FWAF.frm)
 summary(A.mod)
+mse(A.mod)
+
 
 fit1<-lmer(V1~  Side + (1|Individual), REML=TRUE, data= FWAF.frm)
 fit1
@@ -42,7 +46,7 @@ B.mod=aov(ValuesFWLF~ Side * Individual, data=FWLF.frm)
 summary(B.mod)
 
 
-fit2 <- lme4::lmer(ValuesFWLF ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
+fit2 <- lmerTest::lmer(ValuesFWLF ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
                    data= FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
 mse(fit2)
@@ -167,13 +171,17 @@ attach(Forceps.frm)
 Forceps.frm
 
 shapiro.test(Value)
+boxplot(Value~Side,data=Forceps.frm)
+
 
 # p value used = lmerTest::lmer
-fit2 <- lme4::lmer(Value ~ Side * Individual + (1|Individual) + (1|Individual:Side), 
+fit2 <- lmerTest::lmer(Value ~ Side * Individual + (1|Individual) + (1|Individual:Side), 
                    data= Forceps.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
 mse(fit2)
 var(resid(fit2))*99/90
 summary(fit2)
 rand(fit2)
+
+
 
