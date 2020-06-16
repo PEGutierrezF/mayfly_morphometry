@@ -93,84 +93,9 @@ summary(mod4)
 rand(mod4)
 
 
-
-#####################
-##### Hind Wing #####
-#####################
-
-# Hind Wing Area Female ---------------------------------------------------
-# HWAF= Hind Wing Area Female
-
-HWAF.frm=read.csv("Asymmetries/HindWAreaFemale.csv")
-attach(HWAF.frm)
-HWAF.frm
-
-shapiro.test(ValueHWAF)
-boxplot(ValueHWAF~Side,data=HWAF.frm)
-
-mod4 <- lmerTest::lmer(ValueFWLM ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
-                       data= FWLM.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
-anova(mod4)
-mse(mod4)
-var(resid(mod4))*99/90
-summary(mod4)
-rand(mod4)
-
-
-# Hind Wing Area Female
-# HWLF= Hind Wing Length Female
-
-HWLF.frm=read.csv("HindWLengthFemale.csv")
-attach(HWLF.frm)
-HWLF.frm
-
-shapiro.test(ValueHWLF)
-V4<-1/(ValueHWLF)
-shapiro.test(V4)
-
-F.mod=aov(V4~ Side*Individual + (1 | Individual), data=HWLF.frm)
-summary(F.mod)
-
-
-
-# Hind Wing Area Male -----------------------------------------------------
-# HWAM= Hind Wing Area Male
-
-
-HWAM.frm=read.csv("Asymmetries/HindWAreaMale.csv")
-attach(HWAM.frm)
-HWAM.frm
-
-shapiro.test(ValueHWAM)
-boxplot(ValueHWAM~Side,data=HWAM.frm)
-
-mod4 <- lmerTest::lmer(ValueFWLM ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
-                       data= FWLM.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
-anova(mod4)
-mse(mod4)
-var(resid(mod4))*99/90
-summary(mod4)
-rand(mod4) 
-
-
-# Hind Wing Length Male
-# HWLM= Hind Wing Length Male
-
-
-HWLM.frm=read.csv("HindWLengthMale.csv")
-attach(HWLM.frm)
-HWLM.frm
-
-shapiro.test(ValueHWLM)
-V5 <- 1/(ValueHWLM)
-shapiro.test(V5)
-
-H.mod=aov(V5~Side * factor(Individual) * (1|Individual),data=HWLM.frm)
-summary(H.mod)
-
-
-
+####################
 ###### Forceps #####
+####################
 
 Forceps.frm=read.csv("Asymmetries/Forceps.csv")
 attach(Forceps.frm)
