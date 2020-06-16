@@ -12,7 +12,8 @@ library(sjstats)
 
 ##### First Wing #####
 
-# First Wing Area Female
+
+# First Wing Area Female --------------------------------------------------
 # FWAF= First Wing Area Female
 
 FWAF.frm=read.csv("Asymmetries/FirstWAreaFemale.csv")
@@ -43,10 +44,6 @@ FWLF.frm
 shapiro.test(ValuesFWLF)
 boxplot(ValuesFWLF~Side,data=FWLF.frm)
 
-B.mod=aov(ValuesFWLF~ Side * Individual, data=FWLF.frm)
-summary(B.mod)
-
-
 fit2 <- lmerTest::lmer(ValuesFWLF ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
                    data= FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(fit2)
@@ -55,50 +52,30 @@ var(resid(fit2))*99/90
 summary(fit2)
 rand(fit2)
 
-devtools::install_github("goodekat/redres")
-library(redres)
-compute_redres(fit2)
 
-formula(fit2)
-REMLcrit(fit2)
-residuals(fit2, "pearson", scaled = TRUE)
-
-
-#  Measurement error ------------------------------------------------------
-
-Error_FWLF.frm=read.csv("Asymmetries/FirstWLengthFemaleERROR.csv")
-attach(Error_FWLF.frm)
-Error_FWLF.frm
-
-shapiro.test(ValuesFWLF)
-boxplot(ValuesFWLF~Side,data=FWLF.frm)
-
-FWLF.mod=aov(VFWLF ~ Side * Individual, data=Error_FWLF.frm)
-summary(FWLF.mod)
-
-fit3 <- lme4::lmer(VFWLF ~ Side*Individual + (1|Individual), 
-                   data= Error_FWLF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
-anova(fit3)
-summary(fit3)
-
-
-
-# First Wing Length Male
+# First Wing Area Male --------------------------------------------------
 # FWAM = First Wing Length Male
 
-FWAM.frm=read.csv("FirstWAreaMale.csv")
+FWAM.frm=read.csv("Asymmetries/FirstWAreaMale.csv")
 attach(FWAM.frm)
 FWAM.frm
+head(FWAM.frm)
 
 shapiro.test(ValueFWAM)
 V3<-1/(ValueFWAM)
 shapiro.test(V3)
 
-C.mod=aov(V3~ Side * Individual + (1 | Individual) ,data=FWAM.frm)
-summary(C.mod)
+fit2 <- lmerTest::lmer(V3 ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
+                       data= FWAM.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
+anova(fit2)
+mse(fit2)
+var(resid(fit2))*99/90
+summary(fit2)
+rand(fit2)
 
 
-# First Wing Length Male
+
+# First Wing Length Male ------------------------------------------------
 # FWAM = First Wing Length Male
 
 FWLM.frm=read.csv("FirstWLengthMale.csv")
