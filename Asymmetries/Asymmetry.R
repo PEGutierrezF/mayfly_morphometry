@@ -12,7 +12,6 @@ library(sjstats)
 
 ##### First Wing #####
 
-
 # First Wing Area Female --------------------------------------------------
 # FWAF= First Wing Area Female
 
