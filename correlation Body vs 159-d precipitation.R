@@ -47,6 +47,6 @@ c2 <- ggplot(correlation, aes(x=Prec159,
   theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5))
 print(c2)
 
-c2 + ggsave("Figure3.jpeg",width=6, height=4,dpi=600)
+c2 + ggsave("Figure 3.PNG",width=6, height=4,dpi=1000)
 
 

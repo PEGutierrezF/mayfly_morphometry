@@ -98,7 +98,7 @@ print(r2)
 
 r3 <- (r1 / r2) + plot_annotation(tag_levels = 'A')
 r3
-r3 + ggsave("Figure1.jpeg",width=6, height=6,dpi=600)
+r3 + ggsave("Figure 1.PNG",width=6, height=6,dpi=1000)
 
 
 
