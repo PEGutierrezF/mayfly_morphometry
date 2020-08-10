@@ -31,9 +31,11 @@ FWAF.frm
 head(FWAF.frm)
 
 shapiro.test(ValueFWAF)
+V1<-1/(ValueFWAF)
+shapiro.test(V1)
 boxplot(ValueFWAF~Side,data=FWAF.frm)
 
-mod1 <- lmerTest::lmer(ValueFWAF ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
+mod1 <- lmerTest::lmer(V1 ~ Side*Individual + (1|Individual) + (1|Individual:Side), 
                        data= FWAF.frm, REML= FALSE, control =lmerControl(check.conv.singular = .makeCC(action = "ignore",  tol = 1e-4)))
 anova(mod1)
 mse(mod1)
